@@ -17,4 +17,10 @@ public class GlobalExceptionHandler
         return new ResponseEntity<>(ex.getExMsg(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(RoleExceptionHandler.class)
+    public ResponseEntity<String> roleException(RoleExceptionHandler ex)
+    {
+        return new ResponseEntity<>(ex.getExMsg(),HttpStatus.NOT_FOUND);
+    }
+
 }

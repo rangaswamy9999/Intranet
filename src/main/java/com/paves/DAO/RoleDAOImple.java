@@ -5,6 +5,8 @@ import com.paves.Repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class RoleDAOImple implements RoleDAO
 {
@@ -12,8 +14,19 @@ public class RoleDAOImple implements RoleDAO
     RoleRepository roleRepository;
 
     @Override
-    public void insertRole(Role role) {
-        roleRepository.save(role);
+    public Role insertRole(Role role) {
+        return roleRepository.save(role);
+    }
+
+    @Override
+    public Role deleteByRoleId(long roleId) {
+        return roleRepository.findById(roleId).map(
+                (role)->
+                {
+                    roleRepository.deleteById(roleId);
+                    return role;
+                }
+        ).orElse(null);
     }
 
 }

@@ -32,33 +32,23 @@ public class UserDAOImple implements UserDAO{
 
     @Override
     public User getUserById(String id) {
-        Optional<User> optionalUser = userRepository.findByUserId(id);
-        if(optionalUser.isPresent())
-        {
-            return optionalUser.get();
-        }
-        return null;
+        return userRepository.findByUserId(id).orElse(null);
     }
 
     @Override
     public User updateUserByusingId(String id, User user) {
-        if(getUserById(id) != null)
-        {
-            userRegistration(user);
-            return user;
-        }
-        return null;
+        return getUserById(id) != null ? userRegistration(user) : null;
     }
 
     @Transactional
     @Override
     public User deleteUserById(String id) {
-        Optional<User> optionalUser = userRepository.findByUserId(id);
-        if(optionalUser.isPresent())
-        {
-            return optionalUser.get();
-        }
-        return null;
+        return userRepository.findByUserId(id)
+                .map(user -> {
+                    userRepository.deleteByUserId(id);
+                    return user;
+                })
+                .orElse(null);
     }
 
 

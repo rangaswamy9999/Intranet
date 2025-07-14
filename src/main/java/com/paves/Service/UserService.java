@@ -15,4 +15,5 @@ public interface UserService {
     ResponseEntity<String> assignRoleToUser(String userId, Long roleId);
     ResponseEntity<String> removeRoleToUser(String userId, Long roleId);
 
+
 }
