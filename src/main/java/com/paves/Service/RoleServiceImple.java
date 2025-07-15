@@ -52,4 +52,15 @@ public class RoleServiceImple implements RoleService{
             throw new RoleExceptionHandler("Role Id Not Found");
         }
     }
+
+    @Override
+    public Role assignPermissionToRole(Long roleId, Long permissionId) {
+        return roleDAO.assignPermissionToRole(roleId, permissionId);
+    }
+
+    @Override
+    public Role removePermissionFromRole(Long roleId, Long permissionId) {
+        return roleDAO.removePermissionFromRole(roleId, permissionId);
+    }
+
 }

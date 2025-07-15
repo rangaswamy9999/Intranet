@@ -1,18 +1,15 @@
 package com.paves.DAO;
 
+import com.paves.Entity.Permission;
 import com.paves.Entity.Role;
-import com.paves.Entity.User;
 import com.paves.Exception.RoleExceptionHandler;
+import com.paves.Repository.PermissionRepository;
 import com.paves.Repository.RoleRepository;
 import com.paves.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ConcurrentModificationException;
-import java.util.List;
-import java.util.Optional;
+
 
 @Component
 public class RoleDAOImple implements RoleDAO
@@ -54,5 +51,34 @@ public class RoleDAOImple implements RoleDAO
                 }
         ).orElse(null);
     }
+
+
+    @Autowired
+    private PermissionRepository permissionRepository;
+
+    @Override
+    public Role assignPermissionToRole(Long roleId, Long permissionId) {
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RoleExceptionHandler("Role not found"));
+
+        Permission permission = permissionRepository.findById(permissionId)
+                .orElseThrow(() -> new RoleExceptionHandler("Permission not found"));
+
+        role.getPermissions().add(permission);
+        return roleRepository.save(role);
+    }
+
+    @Override
+    public Role removePermissionFromRole(Long roleId, Long permissionId) {
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RoleExceptionHandler("Role not found"));
+
+        Permission permission = permissionRepository.findById(permissionId)
+                .orElseThrow(() -> new RoleExceptionHandler("Permission not found"));
+
+        role.getPermissions().remove(permission);
+        return roleRepository.save(role);
+    }
+
 
 }
