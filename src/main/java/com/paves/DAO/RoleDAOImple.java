@@ -23,7 +23,19 @@ public class RoleDAOImple implements RoleDAO
         return roleRepository.findById(roleId).map(
                 (role)->
                 {
-                    roleRepository.deleteById(roleId);
+                    System.out.println(role.getUsers());
+//                    roleRepository.deleteById(roleId);
+                    return role;
+                }
+        ).orElse(null);
+    }
+
+    @Override
+    public Role updateByRoleId(long roleId,Role role) {
+        return roleRepository.findById(roleId).map(
+                (rolel)->
+                {
+                    roleRepository.save(role);
                     return role;
                 }
         ).orElse(null);

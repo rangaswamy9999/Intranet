@@ -20,9 +20,15 @@ public class RoleController {
         return roleService.roleRegister(role);
     }
 
-    @DeleteMapping("remove_role/{roleId}")
+    @DeleteMapping("/{roleId}")
     public ResponseEntity<Role> removeRole(@PathVariable long roleId)
     {
         return roleService.removeRole(roleId);
+    }
+
+    @PutMapping("/{roleId}")
+    public ResponseEntity<Role> updateRoleById(@PathVariable long roleId,@RequestBody Role role)
+    {
+        return roleService.updateRoleByRoleID(roleId,role);
     }
 }

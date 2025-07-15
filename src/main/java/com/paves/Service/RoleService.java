@@ -6,4 +6,5 @@ import org.springframework.http.ResponseEntity;
 public interface RoleService {
     ResponseEntity<Role> roleRegister(Role role);
     ResponseEntity<Role> removeRole(long roleId);
+    ResponseEntity<Role> updateRoleByRoleID(long roleId,Role role);
 }
