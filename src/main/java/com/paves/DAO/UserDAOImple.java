@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class UserDAOImple implements UserDAO{
@@ -84,4 +85,15 @@ public class UserDAOImple implements UserDAO{
             return "";
         }
     }
+
+    @Override
+    public List<User> getAllUsersWithRoles() {
+        List<User> users = userRepository.findAll();
+        List<User> userRoles = users.stream()
+                .filter(user -> user.getRoles() != null && !user.getRoles().isEmpty())
+                .collect(Collectors.toList());
+
+        return userRoles;
+    }
+
 }

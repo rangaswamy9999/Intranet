@@ -14,6 +14,7 @@ public interface UserService {
     ResponseEntity<User> deleteUserById(String id);
     ResponseEntity<String> assignRoleToUser(String userId, Long roleId);
     ResponseEntity<String> removeRoleToUser(String userId, Long roleId);
+    ResponseEntity<List<User>> getAllUsersWithRoles();
 
 
 }

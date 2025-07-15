@@ -40,6 +40,7 @@ public class RoleServiceImple implements RoleService{
         }
     }
 
+
     @Override
     public ResponseEntity<Role> updateRoleByRoleID(long roleId, Role role) {
         Role roleRes = roleDAO.updateByRoleId(roleId,role);

@@ -98,4 +98,10 @@ public class UserServiceImple implements UserService
             return new ResponseEntity<>(msg,HttpStatus.ACCEPTED);
         }
     }
+
+    @Override
+    public ResponseEntity<List<User>> getAllUsersWithRoles() {
+        List<User> users = userDAO.getAllUsersWithRoles();
+        return users.size()!=0? new ResponseEntity<>(users,HttpStatus.FOUND): new ResponseEntity<>(users,HttpStatus.NOT_FOUND);
+    }
 }

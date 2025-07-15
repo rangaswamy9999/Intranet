@@ -55,4 +55,10 @@ public class UserController {
         return userService.removeRoleToUser(userId,roleId);
     }
 
+    @GetMapping("/getAllRoles")
+    public ResponseEntity<List<User>> getAllRolesAssingedToUsers()
+    {
+        return userService.getAllUsersWithRoles();
+    }
+
 }

@@ -13,4 +13,5 @@ public interface UserDAO
     User deleteUserById(String id);
     String assignRoleToUser(String userId, Long roleId);
     String removeRoleToUser(String userId,Long roleId);
+    List<User> getAllUsersWithRoles();
 }
