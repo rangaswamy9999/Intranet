@@ -1,18 +1,11 @@
-// User.java
 package com.paves.Entity;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -25,16 +18,16 @@ public class User {
     @Id
     private String userId;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String userName;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private long phone;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -49,14 +42,12 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @PrePersist
-    public void generateId(){
-        if(this.userId == null){
-            this.userId ="PAV"+ UUID.randomUUID().toString().replace("-","").substring(0,5).toUpperCase();
+    public void generateId() {
+        if (this.userId == null) {
+            this.userId = "PAV" + UUID.randomUUID().toString().replace("-", "").substring(0, 5).toUpperCase();
         }
-        if(this.dateCreated==null)
-        {
+        if (this.dateCreated == null) {
             this.dateCreated = LocalDate.now();
         }
     }
-
 }

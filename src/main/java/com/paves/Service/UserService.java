@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface UserService {
     ResponseEntity<User> userRegistration(User user);
+    String login(User user);
     ResponseEntity<List<User>> getAllUsers();
     ResponseEntity<User> getUserById(String id);
     ResponseEntity<User> updateUserByusingId(String id,User user);
@@ -15,6 +16,4 @@ public interface UserService {
     ResponseEntity<String> assignRoleToUser(String userId, Long roleId);
     ResponseEntity<String> removeRoleToUser(String userId, Long roleId);
     ResponseEntity<List<User>> getAllUsersWithRoles();
-
-
 }

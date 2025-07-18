@@ -2,14 +2,13 @@ package com.paves.Controller;
 
 
 import com.paves.Entity.User;
+import com.paves.Service.MyUserDetailsService;
 import com.paves.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -17,6 +16,21 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    MyUserDetailsService customMyUserDetailsService;
+
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody User user)
+    {
+        return userService.userRegistration(user);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody User user) {
+        System.out.println(user.toString());
+        return userService.login(user);
+    }
 
     @GetMapping("/getAll")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -28,11 +42,6 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-
-    @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return userService.userRegistration(user);
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User user) {

@@ -1,6 +1,5 @@
 package com.paves.Exception;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,9 +21,14 @@ public class GlobalExceptionHandler
         return new ResponseEntity<>(ex.getExMsg(),HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRuntimeException(PermissionExceptionHandler ex) {
+    @ExceptionHandler(PermissionExceptionHandler.class)
+    public ResponseEntity<String> handlePermissionException(PermissionExceptionHandler ex) {
         return new ResponseEntity<>(ex.getExMsg(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return new ResponseEntity<>("An unexpected error occurred: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

@@ -7,6 +7,7 @@ import com.paves.Repository.RoleRepository;
 import com.paves.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class UserDAOImple implements UserDAO{
 
     @Override
     public User userRegistration(User user) {
+        // Remove duplicate password encoding - UserServiceImple already handles this
         return userRepository.save(user);
     }
 
